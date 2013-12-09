@@ -18,8 +18,8 @@ using std::endl;
 
 void OrbitAnswerBase::Print(ostream& out)
 {
-	for(auto byte: *this)
-		out<<byte<<" ";
+	for(auto it=this->begin();it!= this->end(); ++it)
+		out<<*it<<" ";
 	out<<endl;
 }
 
@@ -27,8 +27,8 @@ void OrbitAnswerBase::Print(ostream& out)
 void OrbitAnswerBase::PrintHex(ostream& out)
 {
 	out<<std::hex;
-	for(int byte: *this)
-		out<<std::hex<<byte<<" ";
+	for(auto it=this->begin();it!= this->end(); ++it)	
+		out<<std::hex<<*it<<" ";
 	out<<std::dec<<endl;
 }
 
@@ -214,7 +214,7 @@ void OrbitAnswerGetstatus::Print(ostream& out)
 
 string OrbitAnswerGetstatusDP::Mode(unsigned int mode)
 {
-	vector<string> modes = { "Normal mode",
+	std::vector<string> modes = { "Normal mode",
 			   "OrbitDifference mode",
 			   "OrbitAcquire mode",
 			   "Sync mode",
@@ -297,8 +297,8 @@ std::vector<int16_t> OrbitAnswerReadbuffer1::Values(void)
 	values.resize(words);
 	
 	int i = 2;
-	for(auto& word: values){
-		word = Short(i);
+	for(auto it=values.begin();it!= values.end(); ++it) {
+		*it = Short(i);
 		i+=2;
 	}
 	return values;
@@ -312,8 +312,8 @@ void OrbitAnswerReadbuffer1::Print(ostream& out)
 	out<<"Calculated checksum: "<<CalcChecksum()<<endl;
 	out<<endl;
 	out<<"Values:"<<endl;
-	for(auto& word: Values())
-		out<<word<<" "<<endl;
+	for(auto it=Values().begin();it!= Values().end(); ++it)		
+		out<<*it<<" "<<endl;
 	out<<endl;
 	out<<endl;
 }

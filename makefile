@@ -10,13 +10,14 @@ TARGET   =orbit_dp10
 
 # PATH := /opt/mingw-w64/bin:$(PATH)
 BIN_DIR=../bin/$(ARCH)
-# COMPILE_PREFIX=i586-mingw32msvc-
+COMPILE_PREFIX=i586-mingw32msvc-
 # COMPILE_PREFIX=i686-w64-mingw32-
 # COMPILE_PREFIX=i686-w64-mingw32-
-COMPILE_PREFIX=x86_64-unknown-linux-gnu-
+# COMPILE_PREFIX=x86_64-unknown-linux-gnu-
 
 
-CC=$(COMPILE_PREFIX)g++-4.8.2
+# CC=$(COMPILE_PREFIX)g++-4.8.2
+CC=$(COMPILE_PREFIX)g++
 # CC=g++-4.8.2
 # CC=g++-4.8
 
@@ -33,9 +34,9 @@ SOURCE_DIRS =./
 CPPSRC=
 CPPSRC+=main.cpp
 CPPSRC+=debug.cpp
-# CPPSRC+=comport_win.cpp
+CPPSRC+=comport_win.cpp
 CPPSRC+=comport_itf.cpp
-CPPSRC+=comport_linux.cpp
+# CPPSRC+=comport_linux.cpp
 CPPSRC+=orbit_commands.cpp
 CPPSRC+=orbit_answers.cpp
 CPPSRC+=orbit_network.cpp
@@ -141,7 +142,8 @@ CPPFLAGS += -Wa,-adhlns=$(<:%.cpp=%.lst)
 CPPFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CPPFLAGS +=$(CPPSTANDARD)
 
-CPPFLAGS +=-std=c++11
+# CPPFLAGS +=-std=c++11
+CPPFLAGS +=-std=c++0x
 # !!!!  this options causes crash of OPC server  !!!!
 # CPPFLAGS += -fpack-struct   
 

@@ -21,6 +21,16 @@ using std::cout;
 using std::endl;
 
 
+#ifdef __WIN32
+void sleep(int seconds)
+{
+	Sleep( seconds*1000);
+}
+#endif
+
+
+
+
 
 void  workThread(void)
 {

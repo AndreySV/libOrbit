@@ -101,16 +101,23 @@ class OrbitException: public std::exception
 	shared_ptr<OrbitAnswerBase> Answer;
 public:
 	OrbitException(
+		vector<unsigned char>& _Request	 ):
+		Request(_Request)
+		{};
+	
+	OrbitException(
 		vector<unsigned char>& _Request,
-		shared_ptr<OrbitAnswerBase> _Answer = nullptr):
+		shared_ptr<OrbitAnswerBase> _Answer ):
 		Request(_Request),
 		Answer(_Answer) {};
 
+	virtual ~OrbitException() throw() {};
+	
 	vector<unsigned char>& GetRequest(void) { return Request; };
 	shared_ptr<OrbitAnswerBase>& GetAnswer(void) { return Answer; };
 
 
-	const char* what() const noexcept;
+	const char* what() const throw();
 };
 
 
@@ -119,8 +126,9 @@ class OrbitTimeout: public std::exception
 {
 public:
 	OrbitTimeout() {};
+	virtual ~OrbitTimeout() throw() {};
 
-	const char* what() const noexcept
+	const char* what() const throw()
 	{
 		return string("Network timeout").c_str();
 	}

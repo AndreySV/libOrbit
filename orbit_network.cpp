@@ -70,8 +70,8 @@ void OrbitNetwork::SendCommand( OrbitCommandBase& cmd )
 	
 	// send request
 	GenerateBreak();
-	for(auto byte: Request )
-		WriteByte( byte );
+	for(auto it=Request.begin();it!= Request.end(); ++it)
+		WriteByte( *it );
 
 	// read answer
 	OrbitException exceptionData( Request, Answer );
@@ -86,7 +86,8 @@ void OrbitNetwork::SendCommand( OrbitCommandBase& cmd )
 			
 			if ((i==0) && (byte == '!'))
 				exception = true;
-			if ( Answer!=nullptr )
+			
+			if ( Answer!=NULL )
 				(*Answer)[i] = byte;
 			i++;
 		}
@@ -107,19 +108,19 @@ void OrbitNetwork::SendCommand( OrbitCommandBase& cmd )
 
 	
 
-const char* OrbitException::what(void) const noexcept
+const char* OrbitException::what(void) const throw()
 {
 	std::ostringstream out;
 
 	out<<"Request: "<<endl;
-	for(auto byte: Request )
-		out<<std::hex<<byte<<" ";
+	for(auto it=Request.begin();it!= Request.end(); ++it)	
+		out<<std::hex<<*it<<" ";
 	out<<endl;
 
-	if (Answer!=nullptr) {
+	if (Answer!=NULL) {
 		out<<"Answer: "<<endl;
-		for(auto byte: *Answer)
-			out<<std::hex<<byte<<" ";
+		for(auto it=Answer->begin();it!= Answer->end(); ++it)		
+			out<<std::hex<<*it<<" ";
 		out<<endl;
 	}
 

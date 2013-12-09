@@ -23,7 +23,7 @@ class OrbitAnswerBase: public std::vector<unsigned char>
 	template<class T> T  IntDifferentSize(int start)
 	{
 		T ret = 0;
-		for(int i=0;i<sizeof(T);++i)
+		for(unsigned int i=0;i<sizeof(T);++i)
 			ret +=(*this)[start+i]<<(8*i);
 		return ret;
 	};

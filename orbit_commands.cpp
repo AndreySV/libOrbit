@@ -10,20 +10,20 @@
 void OrbitCommandBase::AnswerData(shared_ptr<OrbitAnswerBase> _Answer)
 {
 	Answer = _Answer;
-	if (Answer != nullptr )
+	if (Answer != NULL )
 		Answer->resize(AnswerLength);
 }
 
 
 OrbitCommandRst::OrbitCommandRst(void):
-	OrbitCommandBase( nullptr )
+	OrbitCommandBase()
 {
 	Request.resize(2);
 	Request[0] = OrbitCommands::OrbitRst;
 	Request[1] = 0x0;
 	AnswerLength = 0;
 	
-	if (Answer!=nullptr) 
+	if (Answer!=NULL) 
 		Answer->resize(AnswerLength);
 }
 

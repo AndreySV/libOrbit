@@ -57,7 +57,12 @@ protected:
 	unsigned int AnswerLength;
 	shared_ptr<OrbitAnswerBase> Answer;
 public:
-	OrbitCommandBase(shared_ptr<OrbitAnswerBase> _Answer = nullptr):
+	OrbitCommandBase():
+		Request(0),
+		AnswerLength(0)
+	{};
+	
+	OrbitCommandBase(shared_ptr<OrbitAnswerBase> _Answer ):
 		Request(0),
 		AnswerLength(0),
 		Answer( _Answer )
